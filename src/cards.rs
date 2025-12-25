@@ -43,7 +43,7 @@ impl Values {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Card {
     suit: Suits,
     value: Values,
