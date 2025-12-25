@@ -51,6 +51,6 @@ pub struct Card {
 
 impl Card {
     pub fn new(suit: Suits, value: Values) -> Card {
-        return Card { suit, value };
+        Card { suit, value }
     }
 }

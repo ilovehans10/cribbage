@@ -18,7 +18,7 @@ fn make_deck() -> Vec<Card> {
             deck.push(Card::new(suit.clone(), value.clone()));
         }
     }
-    return deck;
+    deck
 }
 
 fn make_hand(deck: &mut Vec<Card>, size: usize) -> Vec<Card> {
