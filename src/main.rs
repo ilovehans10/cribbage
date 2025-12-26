@@ -7,7 +7,7 @@ mod cards;
 fn main() {
     let mut deck = make_deck();
     deck.shuffle(&mut rng());
-    dbg!(make_hand(&mut deck, 50));
+    dbg!(make_hand(&mut deck, 5));
     dbg!(deck.len());
 }
 
@@ -22,5 +22,5 @@ fn make_deck() -> Vec<Card> {
 }
 
 fn make_hand(deck: &mut Vec<Card>, size: usize) -> Vec<Card> {
-    deck.split_off(size)
+    deck.split_off(deck.len() - size)
 }
