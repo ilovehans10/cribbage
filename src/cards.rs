@@ -1,5 +1,6 @@
 use self::Ranks::*;
 use self::Suits::*;
+use itertools::{Itertools, Position};
 use std::fmt::Display;
 use std::slice::Iter;
 
@@ -104,6 +105,30 @@ impl Card {
 
     pub fn to_value(&self) -> usize {
         self.value.to_value()
+    }
+
+    pub fn make_deck() -> Vec<Card> {
+        let mut deck: Vec<Card> = vec![];
+        for suit in Suits::iterator() {
+            for value in Ranks::iterator() {
+                deck.push(Card::new(suit.clone(), value.clone()));
+            }
+        }
+        deck
+    }
+
+    pub fn make_hand(deck: &mut Vec<Card>, size: usize) -> Vec<Card> {
+        deck.split_off(deck.len() - size)
+    }
+
+    pub fn print_hand(deck: &[Card]) {
+        for (deck_position, card) in deck.iter().with_position() {
+            match deck_position {
+                Position::Last => print!("{}", card),
+                _ => print!("{}, ", card),
+            }
+        }
+        println!();
     }
 }
 
