@@ -1,4 +1,5 @@
 use cards::{Card, Ranks, Suits};
+use itertools::{Itertools, Position};
 use rand::prelude::SliceRandom;
 use rand::rng;
 use scoring::Scorer;
@@ -35,11 +36,10 @@ fn make_hand(deck: &mut Vec<Card>, size: usize) -> Vec<Card> {
 }
 
 fn print_hand(deck: &[Card]) {
-    for (index, card) in deck.iter().enumerate() {
-        if index < deck.len() {
-            print!("{}, ", card)
-        } else {
-            print!("{}", card)
+    for (deck_position, card) in deck.iter().with_position() {
+        match deck_position {
+            Position::Last => print!("{}", card),
+            _ => print!("{}, ", card),
         }
     }
     println!();
