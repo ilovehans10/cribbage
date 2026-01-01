@@ -1,8 +1,10 @@
 use cards::{Card, Ranks, Suits};
 use rand::prelude::SliceRandom;
 use rand::rng;
+use scoring::Scorer;
 
 mod cards;
+mod scoring;
 
 fn main() {
     let mut deck = make_deck();
@@ -13,6 +15,9 @@ fn main() {
     hand1.swap_remove(3);
     print_hand(&hand1);
     dbg!(deck.len());
+    for solver in Scorer::rules_for_show() {
+        println!("Score from {}s: {}", solver.name, (solver.rule)(&hand1));
+    }
 }
 
 fn make_deck() -> Vec<Card> {

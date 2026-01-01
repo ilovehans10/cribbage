@@ -3,7 +3,7 @@ use self::Suits::*;
 use std::fmt::Display;
 use std::slice::Iter;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Suits {
     Diamonds,
     Hearts,
@@ -27,7 +27,7 @@ impl Suits {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Ranks {
     Ace,
     Two,
@@ -69,17 +69,37 @@ impl Ranks {
         }
         .to_string()
     }
+    pub fn to_value(&self) -> usize {
+        match self {
+            Ace => 1,
+            Two => 2,
+            Three => 3,
+            Four => 4,
+            Five => 5,
+            Six => 6,
+            Seven => 7,
+            Eight => 8,
+            Nine => 9,
+            Ten => 10,
+            Jack => 10,
+            Queen => 10,
+            King => 10,
+        }
+    }
 }
 
 #[derive(Debug, Clone)]
 pub struct Card {
-    suit: Suits,
-    value: Ranks,
+    pub suit: Suits,
+    pub value: Ranks,
 }
 
 impl Card {
     pub fn new(suit: Suits, value: Ranks) -> Card {
         Card { suit, value }
+    }
+    pub fn to_value(&self) -> usize {
+        self.value.to_value()
     }
 }
 
