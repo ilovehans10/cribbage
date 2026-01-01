@@ -1,4 +1,4 @@
-use cards::{Card, Suits, Values};
+use cards::{Card, Ranks, Suits};
 use rand::prelude::SliceRandom;
 use rand::rng;
 
@@ -18,7 +18,7 @@ fn main() {
 fn make_deck() -> Vec<Card> {
     let mut deck: Vec<Card> = vec![];
     for suit in Suits::iterator() {
-        for value in Values::iterator() {
+        for value in Ranks::iterator() {
             deck.push(Card::new(suit.clone(), value.clone()));
         }
     }

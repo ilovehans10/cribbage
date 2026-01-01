@@ -1,5 +1,5 @@
+use self::Ranks::*;
 use self::Suits::*;
-use self::Values::*;
 use std::fmt::Display;
 use std::slice::Iter;
 
@@ -28,7 +28,7 @@ impl Suits {
 }
 
 #[derive(Debug, Clone)]
-pub enum Values {
+pub enum Ranks {
     Ace,
     Two,
     Three,
@@ -44,9 +44,9 @@ pub enum Values {
     King,
 }
 
-impl Values {
-    pub fn iterator() -> Iter<'static, Values> {
-        static VALUES: [Values; 13] = [
+impl Ranks {
+    pub fn iterator() -> Iter<'static, Ranks> {
+        static VALUES: [Ranks; 13] = [
             Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King,
         ];
         VALUES.iter()
@@ -74,11 +74,11 @@ impl Values {
 #[derive(Debug, Clone)]
 pub struct Card {
     suit: Suits,
-    value: Values,
+    value: Ranks,
 }
 
 impl Card {
-    pub fn new(suit: Suits, value: Values) -> Card {
+    pub fn new(suit: Suits, value: Ranks) -> Card {
         Card { suit, value }
     }
 }
