@@ -16,6 +16,7 @@ impl Suits {
         static SUITS: [Suits; 4] = [Diamonds, Hearts, Clubs, Spades];
         SUITS.iter()
     }
+
     pub fn short_name(&self) -> String {
         match self {
             Diamonds => "♦",
@@ -51,6 +52,7 @@ impl Ranks {
         ];
         VALUES.iter()
     }
+
     pub fn short_name(&self) -> String {
         match self {
             Ace => "A",
@@ -69,6 +71,7 @@ impl Ranks {
         }
         .to_string()
     }
+
     pub fn to_value(&self) -> usize {
         match self {
             Ace => 1,
@@ -98,6 +101,7 @@ impl Card {
     pub fn new(suit: Suits, value: Ranks) -> Card {
         Card { suit, value }
     }
+
     pub fn to_value(&self) -> usize {
         self.value.to_value()
     }
