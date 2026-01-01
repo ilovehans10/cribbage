@@ -73,7 +73,16 @@ impl Ranks {
         .to_string()
     }
 
-    pub fn to_value(&self) -> usize {
+    pub fn to_cribbage_value(&self) -> usize {
+        match self {
+            Jack => 10,
+            Queen => 10,
+            King => 10,
+            _ => self.to_rank_value(),
+        }
+    }
+
+    pub fn to_rank_value(&self) -> usize {
         match self {
             Ace => 1,
             Two => 2,
@@ -85,9 +94,9 @@ impl Ranks {
             Eight => 8,
             Nine => 9,
             Ten => 10,
-            Jack => 10,
-            Queen => 10,
-            King => 10,
+            Jack => 11,
+            Queen => 12,
+            King => 13,
         }
     }
 }
@@ -104,7 +113,7 @@ impl Card {
     }
 
     pub fn to_value(&self) -> usize {
-        self.value.to_value()
+        self.value.to_cribbage_value()
     }
 
     pub fn make_deck() -> Vec<Card> {
