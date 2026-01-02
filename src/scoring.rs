@@ -17,7 +17,7 @@ impl Scorer {
             rule: Box::new(|deck: &Vec<Card>| {
                 deck.iter()
                     .powerset()
-                    .map(|x| x.iter().fold(0, |a, b| a + b.to_value()))
+                    .map(|x| x.iter().fold(0, |a, b| a + b.to_cribbage_value()))
                     .filter(|x| x == &15)
                     .count()
                     * 2

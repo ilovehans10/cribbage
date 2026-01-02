@@ -112,8 +112,12 @@ impl Card {
         Card { suit, value }
     }
 
-    pub fn to_value(&self) -> usize {
+    pub fn to_cribbage_value(&self) -> usize {
         self.value.to_cribbage_value()
+    }
+
+    pub fn to_rank_value(&self) -> usize {
+        self.value.to_rank_value()
     }
 
     pub fn make_deck() -> Vec<Card> {
