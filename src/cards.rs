@@ -101,7 +101,7 @@ impl Ranks {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Card {
     pub suit: Suits,
     pub value: Ranks,
@@ -148,5 +148,26 @@ impl Card {
 impl Display for Card {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}{}", self.suit.short_name(), self.value.short_name())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::cards::{Card, Suits};
+
+    #[test]
+    fn card_suit_ne() {
+        assert_ne!(
+            Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+            Card::new(Suits::Spades, crate::cards::Ranks::Five),
+        );
+    }
+
+    #[test]
+    fn card_rank_ne() {
+        assert_ne!(
+            Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+            Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+        );
     }
 }
