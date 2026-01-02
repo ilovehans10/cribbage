@@ -1,5 +1,5 @@
 use crate::cards::Card;
-use itertools::Itertools;
+use itertools::{Itertools, Position};
 
 pub struct Scorer {
     pub name: String,
@@ -47,14 +47,34 @@ impl Scorer {
             rule: Box::new(|deck: &Vec<Card>| {
                 let mut check_deck = deck.clone();
                 check_deck.sort();
-                find_runs(&check_deck, 1)
+                let differences = check_deck.windows(2).map(|window| {
+                    {
+                        window[0]
+                            .to_rank_value()
+                            .abs_diff(window[1].to_rank_value())
+                    }
+                });
+                let mut run_multiplier = 1;
+                let mut consecutive_count: isize = 1;
+                for (position, difference) in differences.with_position() {
+                    match difference {
+                        0 => run_multiplier *= 2,
+                        1 => consecutive_count += 1,
+                        _ => {
+                            if position == Position::Middle {
+                                consecutive_count -= 1
+                            }
+                        }
+                    }
+                }
+                if consecutive_count >= 3 {
+                    (consecutive_count * run_multiplier).try_into().unwrap()
+                } else {
+                    0
+                }
             }),
         }
     }
-}
-
-fn find_runs(deck: &Vec<Card>, size: usize) -> usize {
-    0
 }
 
 #[cfg(test)]
