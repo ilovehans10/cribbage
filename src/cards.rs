@@ -104,20 +104,20 @@ impl Ranks {
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Card {
     pub suit: Suits,
-    pub value: Ranks,
+    pub rank: Ranks,
 }
 
 impl Card {
     pub fn new(suit: Suits, value: Ranks) -> Card {
-        Card { suit, value }
+        Card { suit, rank: value }
     }
 
     pub fn to_cribbage_value(&self) -> usize {
-        self.value.to_cribbage_value()
+        self.rank.to_cribbage_value()
     }
 
     pub fn to_rank_value(&self) -> usize {
-        self.value.to_rank_value()
+        self.rank.to_rank_value()
     }
 
     pub fn make_deck() -> Vec<Card> {
@@ -147,7 +147,7 @@ impl Card {
 
 impl Display for Card {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}{}", self.suit.short_name(), self.value.short_name())
+        write!(f, "{}{}", self.suit.short_name(), self.rank.short_name())
     }
 }
 

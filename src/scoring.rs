@@ -31,7 +31,7 @@ impl Scorer {
             rule: Box::new(|deck: &Vec<Card>| {
                 deck.iter()
                     .combinations(2)
-                    .filter(|x| x[0].value == x[1].value)
+                    .filter(|x| x[0].rank == x[1].rank)
                     .count()
                     * 2
             }),
