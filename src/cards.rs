@@ -170,4 +170,20 @@ mod tests {
             Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
         );
     }
+
+    #[test]
+    fn card_rank_cmp() {
+        assert!(
+            Card::new(Suits::Hearts, crate::cards::Ranks::Five)
+                < Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+        );
+    }
+
+    #[test]
+    fn card_both_cmp() {
+        assert!(
+            Card::new(Suits::Hearts, crate::cards::Ranks::Five)
+                < Card::new(Suits::Diamonds, crate::cards::Ranks::Ten),
+        );
+    }
 }
