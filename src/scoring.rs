@@ -52,6 +52,7 @@ impl Scorer {
     /// use crate::scoring::Scorer;
     /// use crate::cards::Card;
     ///
+    /// // three runs of three gives 9 points in runs
     /// let mut hand = vec![
     ///         Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
     ///         Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
