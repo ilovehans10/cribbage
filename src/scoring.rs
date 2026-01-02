@@ -1,5 +1,5 @@
 use crate::cards::Card;
-use itertools::Itertools;
+use itertools::{Itertools, Position};
 
 pub struct Scorer {
     pub name: String,
@@ -8,7 +8,11 @@ pub struct Scorer {
 
 impl Scorer {
     pub fn rules_for_show() -> std::vec::Vec<Scorer> {
-        vec![Scorer::solver_15(), Scorer::solver_pair()]
+        vec![
+            Scorer::solver_15(),
+            Scorer::solver_pair(),
+            Scorer::solver_run(),
+        ]
     }
 
     pub(super) fn solver_15() -> Scorer {
@@ -34,6 +38,40 @@ impl Scorer {
                     .filter(|x| x[0].rank == x[1].rank)
                     .count()
                     * 2
+            }),
+        }
+    }
+    pub(super) fn solver_run() -> Scorer {
+        Scorer {
+            name: String::from("Run"),
+            rule: Box::new(|deck: &Vec<Card>| {
+                let mut check_deck = deck.clone();
+                check_deck.sort();
+                let differences = check_deck.windows(2).map(|window| {
+                    {
+                        window[0]
+                            .to_rank_value()
+                            .abs_diff(window[1].to_rank_value())
+                    }
+                });
+                let mut run_multiplier = 1;
+                let mut consecutive_count: isize = 1;
+                for (position, difference) in differences.with_position() {
+                    match difference {
+                        0 => run_multiplier *= 2,
+                        1 => consecutive_count += 1,
+                        _ => {
+                            if position == Position::Middle {
+                                consecutive_count -= 1
+                            }
+                        }
+                    }
+                }
+                if consecutive_count >= 3 {
+                    (consecutive_count * run_multiplier).try_into().unwrap()
+                } else {
+                    0
+                }
             }),
         }
     }
@@ -135,6 +173,70 @@ mod tests {
                 Card::new(Suits::Hearts, crate::cards::Ranks::Five),
                 Card::new(Suits::Spades, crate::cards::Ranks::Five),
                 Card::new(Suits::Clubs, crate::cards::Ranks::Five),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_run_3() {
+        assert_eq!(
+            3,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+            ])
+        )
+    }
+
+    #[test]
+    fn failing_run_3() {
+        assert_ne!(
+            3,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
+                Card::new(Suits::Spades, crate::cards::Ranks::Three),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_double_run_3() {
+        assert_eq!(
+            6,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
+                Card::new(Suits::Spades, crate::cards::Ranks::Three),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_double_run_3_2() {
+        assert_eq!(
+            6,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
+                Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_run_4() {
+        assert_eq!(
+            4,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Six),
             ])
         )
     }
