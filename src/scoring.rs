@@ -302,4 +302,58 @@ mod tests {
             ])
         )
     }
+
+    #[test]
+    fn scorer_all_good() {
+        let hand = vec![
+            Card::new(Suits::Hearts, crate::cards::Ranks::Seven),
+            Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
+            Card::new(Suits::Spades, crate::cards::Ranks::Eight),
+            Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+            Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+        ];
+        assert_eq!(
+            12,
+            Scorer::rules_for_show()
+                .iter()
+                .map(|rules| (rules.rule)(&hand))
+                .sum::<usize>()
+        );
+    }
+
+    #[test]
+    fn scorer_all_bad() {
+        let hand = vec![
+            Card::new(Suits::Hearts, crate::cards::Ranks::Ace),
+            Card::new(Suits::Hearts, crate::cards::Ranks::Three),
+            Card::new(Suits::Spades, crate::cards::Ranks::Four),
+            Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+            Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+        ];
+        assert_eq!(
+            2,
+            Scorer::rules_for_show()
+                .iter()
+                .map(|rules| (rules.rule)(&hand))
+                .sum::<usize>()
+        );
+    }
+
+    #[test]
+    fn scorer_all_none() {
+        let hand = vec![
+            Card::new(Suits::Hearts, crate::cards::Ranks::Three),
+            Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
+            Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+            Card::new(Suits::Spades, crate::cards::Ranks::Queen),
+            Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+        ];
+        assert_eq!(
+            0,
+            Scorer::rules_for_show()
+                .iter()
+                .map(|rules| (rules.rule)(&hand))
+                .sum::<usize>()
+        );
+    }
 }
