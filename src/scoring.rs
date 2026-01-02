@@ -199,10 +199,11 @@ mod tests {
         assert_eq!(
             6,
             (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
                 Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
                 Card::new(Suits::Spades, crate::cards::Ranks::Nine),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
             ])
         )
     }
