@@ -42,6 +42,28 @@ impl Scorer {
         }
     }
 
+    /// Returns a scorer to calculate score for runs in hand
+    ///
+    /// Checks for consecutive cards, counts them, and then if there are three or more
+    /// constitutive cards it will return their score. If there are multiple runs that use the same
+    /// cards it will find the longest run and make sure the run is multiplied by the number of
+    /// times it is able to be made with repeated cards
+    /// ```
+    /// use crate::scoring::Scorer;
+    /// use crate::cards::Card;
+    ///
+    /// let mut hand = vec![
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
+    ///         Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+    ///         Card::new(Suits::Clubs, crate::cards::Ranks::Nine),
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+    ///     ];
+    /// assert_eq!(
+    ///     9,
+    ///     (Scorer::solver_run().rule)(hand)
+    /// );
+    /// ```
     pub(super) fn solver_run() -> Scorer {
         Scorer {
             name: String::from("Run"),
