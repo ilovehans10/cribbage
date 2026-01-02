@@ -57,6 +57,17 @@ mod tests {
     }
 
     #[test]
+    fn bad_scorer_15() {
+        assert_eq!(
+            0,
+            (Scorer::solver_15().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+            ])
+        )
+    }
+
+    #[test]
     fn scorer_double_15() {
         assert_eq!(
             4,
@@ -88,6 +99,17 @@ mod tests {
             (Scorer::solver_pair().rule)(&vec![
                 Card::new(Suits::Hearts, crate::cards::Ranks::Five),
                 Card::new(Suits::Spades, crate::cards::Ranks::Five),
+            ])
+        )
+    }
+
+    #[test]
+    fn bad_scorer_pair() {
+        assert_eq!(
+            0,
+            (Scorer::solver_pair().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+                Card::new(Suits::Spades, crate::cards::Ranks::King),
             ])
         )
     }
