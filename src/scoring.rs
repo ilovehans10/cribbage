@@ -198,6 +198,20 @@ mod tests {
     }
 
     #[test]
+    fn scorer_triple_double_pair() {
+        assert_eq!(
+            8,
+            (Scorer::solver_pair().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Spades, crate::cards::Ranks::Five),
+                Card::new(Suits::Clubs, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+                Card::new(Suits::Spades, crate::cards::Ranks::Four),
+            ])
+        )
+    }
+
+    #[test]
     fn scorer_run_3() {
         assert_eq!(
             3,
