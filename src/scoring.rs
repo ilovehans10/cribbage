@@ -42,12 +42,12 @@ impl Scorer {
         }
     }
 
-    /// Returns a scorer to calculate score for runs in hand
+    /// Returns a scorer to calculate score for runs in hand.
     ///
     /// Checks for consecutive cards, counts them, and then if there are three or more
     /// constitutive cards it will return their score. If there are multiple runs that use the same
     /// cards it will find the longest run and make sure the run is multiplied by the number of
-    /// times it is able to be made with repeated cards
+    /// times it is able to be made with repeated cards.
     /// ```
     /// use crate::scoring::Scorer;
     /// use crate::cards::Card;
