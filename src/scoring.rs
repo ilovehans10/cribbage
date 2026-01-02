@@ -38,3 +38,32 @@ impl Scorer {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::cards::{Card, Suits};
+
+    use super::Scorer;
+
+    #[test]
+    fn scorer_15() {
+        assert_eq!(
+            2,
+            (Scorer::solver_15().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_pair() {
+        assert_eq!(
+            2,
+            (Scorer::solver_pair().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Spades, crate::cards::Ranks::Five),
+            ])
+        )
+    }
+}
