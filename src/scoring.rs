@@ -230,6 +230,34 @@ mod tests {
     }
 
     #[test]
+    fn scorer_triple_run_3() {
+        assert_eq!(
+            9,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
+                Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+                Card::new(Suits::Clubs, crate::cards::Ranks::Nine),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_double_double_run_3() {
+        assert_eq!(
+            12,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
+                Card::new(Suits::Spades, crate::cards::Ranks::Three),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+            ])
+        )
+    }
+
+    #[test]
     fn scorer_run_4() {
         assert_eq!(
             4,
