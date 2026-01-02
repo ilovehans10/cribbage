@@ -8,7 +8,11 @@ pub struct Scorer {
 
 impl Scorer {
     pub fn rules_for_show() -> std::vec::Vec<Scorer> {
-        vec![Scorer::solver_15(), Scorer::solver_pair()]
+        vec![
+            Scorer::solver_15(),
+            Scorer::solver_pair(),
+            Scorer::solver_run(),
+        ]
     }
 
     pub(super) fn solver_15() -> Scorer {
@@ -37,6 +41,20 @@ impl Scorer {
             }),
         }
     }
+    pub(super) fn solver_run() -> Scorer {
+        Scorer {
+            name: String::from("Run"),
+            rule: Box::new(|deck: &Vec<Card>| {
+                let mut check_deck = deck.clone();
+                check_deck.sort();
+                find_runs(&check_deck, 1)
+            }),
+        }
+    }
+}
+
+fn find_runs(deck: &Vec<Card>, size: usize) -> usize {
+    0
 }
 
 #[cfg(test)]
@@ -135,6 +153,69 @@ mod tests {
                 Card::new(Suits::Hearts, crate::cards::Ranks::Five),
                 Card::new(Suits::Spades, crate::cards::Ranks::Five),
                 Card::new(Suits::Clubs, crate::cards::Ranks::Five),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_run_3() {
+        assert_eq!(
+            3,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+            ])
+        )
+    }
+
+    #[test]
+    fn failing_run_3() {
+        assert_ne!(
+            3,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
+                Card::new(Suits::Spades, crate::cards::Ranks::Three),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_double_run_3() {
+        assert_eq!(
+            6,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
+                Card::new(Suits::Spades, crate::cards::Ranks::Three),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_double_run_3_2() {
+        assert_eq!(
+            6,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
+                Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_run_4() {
+        assert_eq!(
+            4,
+            (Scorer::solver_run().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Six),
             ])
         )
     }
