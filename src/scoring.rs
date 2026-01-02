@@ -48,14 +48,14 @@ impl Scorer {
     /// use crate::cards::Card;
     ///
     /// // two 15s is four points
-    /// let mut hand = vec![
+    /// let hand = vec![
     ///         Card::new(Suits::Hearts, crate::cards::Ranks::Seven),
     ///         Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
     ///         Card::new(Suits::Spades, crate::cards::Ranks::Eight),
     ///     ];
     /// assert_eq!(
     ///     4,
-    ///     (Scorer::solver_run().rule)(hand)
+    ///     (Scorer::solver_run().rule)(&hand)
     /// );
     /// ```
     pub(super) fn solver_15() -> Scorer {
@@ -81,14 +81,14 @@ impl Scorer {
     /// use crate::cards::Card;
     ///
     /// // three pairs is six points
-    /// let mut hand = vec![
+    /// let hand = vec![
     ///         Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
     ///         Card::new(Suits::Spades, crate::cards::Ranks::Nine),
     ///         Card::new(Suits::Clubs, crate::cards::Ranks::Nine),
     ///     ];
     /// assert_eq!(
     ///     6,
-    ///     (Scorer::solver_pair().rule)(hand)
+    ///     (Scorer::solver_pair().rule)(&hand)
     /// );
     /// ```
     pub(super) fn solver_pair() -> Scorer {
@@ -115,7 +115,7 @@ impl Scorer {
     /// use crate::cards::Card;
     ///
     /// // three runs of three gives 9 points in runs
-    /// let mut hand = vec![
+    /// let hand = vec![
     ///         Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
     ///         Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
     ///         Card::new(Suits::Spades, crate::cards::Ranks::Nine),
@@ -124,7 +124,7 @@ impl Scorer {
     ///     ];
     /// assert_eq!(
     ///     9,
-    ///     (Scorer::solver_run().rule)(hand)
+    ///     (Scorer::solver_run().rule)(&hand)
     /// );
     /// ```
     pub(super) fn solver_run() -> Scorer {
