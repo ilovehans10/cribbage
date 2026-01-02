@@ -57,12 +57,62 @@ mod tests {
     }
 
     #[test]
+    fn scorer_double_15() {
+        assert_eq!(
+            4,
+            (Scorer::solver_15().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Spades, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_tripple_15() {
+        assert_eq!(
+            6,
+            (Scorer::solver_15().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+                Card::new(Suits::Spades, crate::cards::Ranks::Ten),
+                Card::new(Suits::Clubs, crate::cards::Ranks::Ten),
+            ])
+        )
+    }
+
+    #[test]
     fn scorer_pair() {
         assert_eq!(
             2,
             (Scorer::solver_pair().rule)(&vec![
                 Card::new(Suits::Hearts, crate::cards::Ranks::Five),
                 Card::new(Suits::Spades, crate::cards::Ranks::Five),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_double_pair() {
+        assert_eq!(
+            4,
+            (Scorer::solver_pair().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Spades, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+                Card::new(Suits::Spades, crate::cards::Ranks::Four),
+            ])
+        )
+    }
+
+    #[test]
+    fn scorer_triple_pair() {
+        assert_eq!(
+            6,
+            (Scorer::solver_pair().rule)(&vec![
+                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Spades, crate::cards::Ranks::Five),
+                Card::new(Suits::Clubs, crate::cards::Ranks::Five),
             ])
         )
     }
