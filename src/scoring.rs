@@ -41,6 +41,7 @@ impl Scorer {
             }),
         }
     }
+
     pub(super) fn solver_run() -> Scorer {
         Scorer {
             name: String::from("Run"),
