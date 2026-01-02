@@ -15,6 +15,25 @@ impl Scorer {
         ]
     }
 
+    /// Returns a scorer to calculate score for 15s in the hand.
+    ///
+    /// Checks for groups of cards in the hand that add up to 15 and then it returns the score for
+    /// having that many 15s in the hand.
+    /// ```
+    /// use crate::scoring::Scorer;
+    /// use crate::cards::Card;
+    ///
+    /// // two 15s is four points
+    /// let mut hand = vec![
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Seven),
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
+    ///         Card::new(Suits::Spades, crate::cards::Ranks::Eight),
+    ///     ];
+    /// assert_eq!(
+    ///     4,
+    ///     (Scorer::solver_run().rule)(hand)
+    /// );
+    /// ```
     pub(super) fn solver_15() -> Scorer {
         Scorer {
             name: String::from("15"),
@@ -29,6 +48,25 @@ impl Scorer {
         }
     }
 
+    /// Returns a scorer to calculate score for pairs in the hand.
+    ///
+    /// Checks for pairs in the hand, counts them, and then it returns the score for having that
+    /// many pairs in the hand.
+    /// ```
+    /// use crate::scoring::Scorer;
+    /// use crate::cards::Card;
+    ///
+    /// // three pairs is six points
+    /// let mut hand = vec![
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
+    ///         Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+    ///         Card::new(Suits::Clubs, crate::cards::Ranks::Nine),
+    ///     ];
+    /// assert_eq!(
+    ///     6,
+    ///     (Scorer::solver_pair().rule)(hand)
+    /// );
+    /// ```
     pub(super) fn solver_pair() -> Scorer {
         Scorer {
             name: String::from("Pair"),
