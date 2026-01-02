@@ -14,7 +14,6 @@ fn main() {
     hand1.swap_remove(3);
     hand1.swap_remove(3);
     Card::print_hand(&hand1);
-    dbg!(deck.len());
     for solver in Scorer::rules_for_show() {
         println!("Score from {}s: {}", solver.name, (solver.rule)(&hand1));
     }
