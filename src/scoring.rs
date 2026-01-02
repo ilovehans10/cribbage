@@ -7,6 +7,30 @@ pub struct Scorer {
 }
 
 impl Scorer {
+    /// Returns a vec of scorers containing the rules for show.
+    ///
+    /// Makes the standard ruleset for the show phase of cribbage.
+    /// ```
+    /// use crate::scoring::Scorer;
+    /// use crate::cards::Card;
+    ///
+    /// // two 15s are four points, two runs of three are six points, and a pair is two points for
+    /// // a total of twelve points
+    /// let hand = vec![
+    ///     Card::new(Suits::Hearts, crate::cards::Ranks::Seven),
+    ///     Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
+    ///     Card::new(Suits::Spades, crate::cards::Ranks::Eight),
+    ///     Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+    ///     Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+    /// ];
+    /// assert_eq!(
+    ///     12,
+    ///     Scorer::rules_for_show()
+    ///         .iter()
+    ///         .map(|rules| (rules.rule)(&hand))
+    ///         .sum::<usize>()
+    /// );
+    /// ```
     pub fn rules_for_show() -> std::vec::Vec<Scorer> {
         vec![
             Scorer::solver_15(),
