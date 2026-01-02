@@ -80,7 +80,7 @@ mod tests {
     }
 
     #[test]
-    fn scorer_tripple_15() {
+    fn scorer_triple_15() {
         assert_eq!(
             6,
             (Scorer::solver_15().rule)(&vec![
