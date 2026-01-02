@@ -55,11 +55,11 @@ impl Scorer {
                             .abs_diff(window[1].to_rank_value())
                     }
                 });
-                let mut run_multiplier = 1;
+
                 let mut consecutive_count: isize = 1;
-                for (position, difference) in differences.with_position() {
+                for (position, difference) in differences.clone().with_position() {
                     match difference {
-                        0 => run_multiplier *= 2,
+                        0 => (),
                         1 => consecutive_count += 1,
                         _ => {
                             if position == Position::Middle {
@@ -68,8 +68,27 @@ impl Scorer {
                         }
                     }
                 }
+                let pair_differences: Vec<_> = differences
+                    .positions(|difference| difference == 0)
+                    .collect();
+
+                let run_multiplier = match pair_differences.len() {
+                    0 => 1,
+                    1 => 2,
+                    2 => {
+                        if pair_differences[0].abs_diff(pair_differences[1]) > 1 {
+                            4
+                        } else {
+                            3
+                        }
+                    }
+                    _ => {
+                        panic!("Should not be possible to get three or more pairs with five cards")
+                    }
+                };
+
                 if consecutive_count >= 3 {
-                    (consecutive_count * run_multiplier).try_into().unwrap()
+                    TryInto::<usize>::try_into(consecutive_count).unwrap() * run_multiplier
                 } else {
                     0
                 }
