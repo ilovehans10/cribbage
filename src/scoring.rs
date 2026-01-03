@@ -7,6 +7,30 @@ pub struct Scorer {
 }
 
 impl Scorer {
+    /// Returns a vec of scorers containing the rules for show.
+    ///
+    /// Makes the standard ruleset for the show phase of cribbage.
+    /// ```
+    /// use crate::scoring::Scorer;
+    /// use crate::cards::Card;
+    ///
+    /// // two 15s are four points, two runs of three are six points, and a pair is two points for
+    /// // a total of twelve points
+    /// let hand = vec![
+    ///     Card::new(Suits::Hearts, crate::cards::Ranks::Seven),
+    ///     Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
+    ///     Card::new(Suits::Spades, crate::cards::Ranks::Eight),
+    ///     Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+    ///     Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+    /// ];
+    /// assert_eq!(
+    ///     12,
+    ///     Scorer::rules_for_show()
+    ///         .iter()
+    ///         .map(|rules| (rules.rule)(&hand))
+    ///         .sum::<usize>()
+    /// );
+    /// ```
     pub fn rules_for_show() -> std::vec::Vec<Scorer> {
         vec![
             Scorer::solver_15(),
@@ -15,6 +39,25 @@ impl Scorer {
         ]
     }
 
+    /// Returns a scorer to calculate score for 15s in the hand.
+    ///
+    /// Checks for groups of cards in the hand that add up to 15 and then it returns the score for
+    /// having that many 15s in the hand.
+    /// ```
+    /// use crate::scoring::Scorer;
+    /// use crate::cards::Card;
+    ///
+    /// // two 15s is four points
+    /// let hand = vec![
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Seven),
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
+    ///         Card::new(Suits::Spades, crate::cards::Ranks::Eight),
+    ///     ];
+    /// assert_eq!(
+    ///     4,
+    ///     (Scorer::solver_run().rule)(&hand)
+    /// );
+    /// ```
     pub(super) fn solver_15() -> Scorer {
         Scorer {
             name: String::from("15"),
@@ -29,6 +72,25 @@ impl Scorer {
         }
     }
 
+    /// Returns a scorer to calculate score for pairs in the hand.
+    ///
+    /// Checks for pairs in the hand, counts them, and then it returns the score for having that
+    /// many pairs in the hand.
+    /// ```
+    /// use crate::scoring::Scorer;
+    /// use crate::cards::Card;
+    ///
+    /// // three pairs is six points
+    /// let hand = vec![
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
+    ///         Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+    ///         Card::new(Suits::Clubs, crate::cards::Ranks::Nine),
+    ///     ];
+    /// assert_eq!(
+    ///     6,
+    ///     (Scorer::solver_pair().rule)(&hand)
+    /// );
+    /// ```
     pub(super) fn solver_pair() -> Scorer {
         Scorer {
             name: String::from("Pair"),
@@ -42,6 +104,29 @@ impl Scorer {
         }
     }
 
+    /// Returns a scorer to calculate score for runs in hand.
+    ///
+    /// Checks for consecutive cards, counts them, and then if there are three or more
+    /// constitutive cards it will return their score. If there are multiple runs that use the same
+    /// cards it will find the longest run and make sure the run is multiplied by the number of
+    /// times it is able to be made with repeated cards.
+    /// ```
+    /// use crate::scoring::Scorer;
+    /// use crate::cards::Card;
+    ///
+    /// // three runs of three gives 9 points in runs
+    /// let hand = vec![
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
+    ///         Card::new(Suits::Spades, crate::cards::Ranks::Nine),
+    ///         Card::new(Suits::Clubs, crate::cards::Ranks::Nine),
+    ///         Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+    ///     ];
+    /// assert_eq!(
+    ///     9,
+    ///     (Scorer::solver_run().rule)(&hand)
+    /// );
+    /// ```
     pub(super) fn solver_run() -> Scorer {
         Scorer {
             name: String::from("Run"),
