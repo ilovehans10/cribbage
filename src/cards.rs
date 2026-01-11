@@ -153,37 +153,31 @@ impl Display for Card {
 
 #[cfg(test)]
 mod tests {
-    use crate::cards::{Card, Suits};
+    use crate::cards::{Card, Ranks, Suits};
 
     #[test]
     fn card_suit_ne() {
         assert_ne!(
-            Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-            Card::new(Suits::Spades, crate::cards::Ranks::Five),
+            Card::new(Suits::Hearts, Ranks::Five),
+            Card::new(Suits::Spades, Ranks::Five),
         );
     }
 
     #[test]
     fn card_rank_ne() {
         assert_ne!(
-            Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-            Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+            Card::new(Suits::Hearts, Ranks::Five),
+            Card::new(Suits::Hearts, Ranks::Ten),
         );
     }
 
     #[test]
     fn card_rank_cmp() {
-        assert!(
-            Card::new(Suits::Hearts, crate::cards::Ranks::Five)
-                < Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
-        );
+        assert!(Card::new(Suits::Hearts, Ranks::Five) < Card::new(Suits::Hearts, Ranks::Ten),);
     }
 
     #[test]
     fn card_both_cmp() {
-        assert!(
-            Card::new(Suits::Hearts, crate::cards::Ranks::Five)
-                < Card::new(Suits::Diamonds, crate::cards::Ranks::Ten),
-        );
+        assert!(Card::new(Suits::Hearts, Ranks::Five) < Card::new(Suits::Diamonds, Ranks::Ten),);
     }
 }
