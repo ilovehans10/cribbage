@@ -188,7 +188,7 @@ impl Scorer {
 
 #[cfg(test)]
 mod tests {
-    use crate::cards::{Card, Suits};
+    use crate::cards::{Card, Ranks, Suits};
 
     use super::Scorer;
 
@@ -197,8 +197,8 @@ mod tests {
         assert_eq!(
             2,
             (Scorer::solver_15().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+                Card::new(Suits::Hearts, Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Ten),
             ])
         )
     }
@@ -208,8 +208,8 @@ mod tests {
         assert_eq!(
             0,
             (Scorer::solver_15().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+                Card::new(Suits::Hearts, Ranks::Four),
+                Card::new(Suits::Hearts, Ranks::Jack),
             ])
         )
     }
@@ -219,9 +219,9 @@ mod tests {
         assert_eq!(
             4,
             (Scorer::solver_15().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-                Card::new(Suits::Spades, crate::cards::Ranks::Five),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+                Card::new(Suits::Hearts, Ranks::Five),
+                Card::new(Suits::Spades, Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Ten),
             ])
         )
     }
@@ -231,10 +231,10 @@ mod tests {
         assert_eq!(
             6,
             (Scorer::solver_15().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
-                Card::new(Suits::Spades, crate::cards::Ranks::Ten),
-                Card::new(Suits::Clubs, crate::cards::Ranks::Ten),
+                Card::new(Suits::Hearts, Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Ten),
+                Card::new(Suits::Spades, Ranks::Ten),
+                Card::new(Suits::Clubs, Ranks::Ten),
             ])
         )
     }
@@ -244,8 +244,8 @@ mod tests {
         assert_eq!(
             2,
             (Scorer::solver_pair().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-                Card::new(Suits::Spades, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Five),
+                Card::new(Suits::Spades, Ranks::Five),
             ])
         )
     }
@@ -255,8 +255,8 @@ mod tests {
         assert_eq!(
             0,
             (Scorer::solver_pair().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
-                Card::new(Suits::Spades, crate::cards::Ranks::King),
+                Card::new(Suits::Hearts, Ranks::Jack),
+                Card::new(Suits::Spades, Ranks::King),
             ])
         )
     }
@@ -266,10 +266,10 @@ mod tests {
         assert_eq!(
             4,
             (Scorer::solver_pair().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-                Card::new(Suits::Spades, crate::cards::Ranks::Five),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
-                Card::new(Suits::Spades, crate::cards::Ranks::Four),
+                Card::new(Suits::Hearts, Ranks::Five),
+                Card::new(Suits::Spades, Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Four),
+                Card::new(Suits::Spades, Ranks::Four),
             ])
         )
     }
@@ -279,9 +279,9 @@ mod tests {
         assert_eq!(
             6,
             (Scorer::solver_pair().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-                Card::new(Suits::Spades, crate::cards::Ranks::Five),
-                Card::new(Suits::Clubs, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Five),
+                Card::new(Suits::Spades, Ranks::Five),
+                Card::new(Suits::Clubs, Ranks::Five),
             ])
         )
     }
@@ -291,11 +291,11 @@ mod tests {
         assert_eq!(
             8,
             (Scorer::solver_pair().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-                Card::new(Suits::Spades, crate::cards::Ranks::Five),
-                Card::new(Suits::Clubs, crate::cards::Ranks::Five),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
-                Card::new(Suits::Spades, crate::cards::Ranks::Four),
+                Card::new(Suits::Hearts, Ranks::Five),
+                Card::new(Suits::Spades, Ranks::Five),
+                Card::new(Suits::Clubs, Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Four),
+                Card::new(Suits::Spades, Ranks::Four),
             ])
         )
     }
@@ -305,9 +305,9 @@ mod tests {
         assert_eq!(
             3,
             (Scorer::solver_run().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Three),
+                Card::new(Suits::Hearts, Ranks::Four),
+                Card::new(Suits::Hearts, Ranks::Five),
             ])
         )
     }
@@ -317,9 +317,9 @@ mod tests {
         assert_ne!(
             3,
             (Scorer::solver_run().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
-                Card::new(Suits::Spades, crate::cards::Ranks::Three),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
+                Card::new(Suits::Hearts, Ranks::Three),
+                Card::new(Suits::Spades, Ranks::Three),
+                Card::new(Suits::Hearts, Ranks::Four),
             ])
         )
     }
@@ -329,10 +329,10 @@ mod tests {
         assert_eq!(
             6,
             (Scorer::solver_run().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
-                Card::new(Suits::Spades, crate::cards::Ranks::Three),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Three),
+                Card::new(Suits::Spades, Ranks::Three),
+                Card::new(Suits::Hearts, Ranks::Four),
+                Card::new(Suits::Hearts, Ranks::Five),
             ])
         )
     }
@@ -342,11 +342,11 @@ mod tests {
         assert_eq!(
             6,
             (Scorer::solver_run().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
-                Card::new(Suits::Spades, crate::cards::Ranks::Nine),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+                Card::new(Suits::Hearts, Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Eight),
+                Card::new(Suits::Hearts, Ranks::Nine),
+                Card::new(Suits::Spades, Ranks::Nine),
+                Card::new(Suits::Hearts, Ranks::Ten),
             ])
         )
     }
@@ -356,11 +356,11 @@ mod tests {
         assert_eq!(
             9,
             (Scorer::solver_run().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Nine),
-                Card::new(Suits::Spades, crate::cards::Ranks::Nine),
-                Card::new(Suits::Clubs, crate::cards::Ranks::Nine),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Ten),
+                Card::new(Suits::Hearts, Ranks::Eight),
+                Card::new(Suits::Hearts, Ranks::Nine),
+                Card::new(Suits::Spades, Ranks::Nine),
+                Card::new(Suits::Clubs, Ranks::Nine),
+                Card::new(Suits::Hearts, Ranks::Ten),
             ])
         )
     }
@@ -370,11 +370,11 @@ mod tests {
         assert_eq!(
             12,
             (Scorer::solver_run().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
-                Card::new(Suits::Spades, crate::cards::Ranks::Three),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Three),
+                Card::new(Suits::Spades, Ranks::Three),
+                Card::new(Suits::Hearts, Ranks::Four),
+                Card::new(Suits::Hearts, Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Five),
             ])
         )
     }
@@ -384,10 +384,10 @@ mod tests {
         assert_eq!(
             4,
             (Scorer::solver_run().rule)(&vec![
-                Card::new(Suits::Hearts, crate::cards::Ranks::Three),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Four),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Five),
-                Card::new(Suits::Hearts, crate::cards::Ranks::Six),
+                Card::new(Suits::Hearts, Ranks::Three),
+                Card::new(Suits::Hearts, Ranks::Four),
+                Card::new(Suits::Hearts, Ranks::Five),
+                Card::new(Suits::Hearts, Ranks::Six),
             ])
         )
     }
@@ -395,11 +395,11 @@ mod tests {
     #[test]
     fn scorer_all_good() {
         let hand = vec![
-            Card::new(Suits::Hearts, crate::cards::Ranks::Seven),
-            Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
-            Card::new(Suits::Spades, crate::cards::Ranks::Eight),
-            Card::new(Suits::Spades, crate::cards::Ranks::Nine),
-            Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+            Card::new(Suits::Hearts, Ranks::Seven),
+            Card::new(Suits::Hearts, Ranks::Eight),
+            Card::new(Suits::Spades, Ranks::Eight),
+            Card::new(Suits::Spades, Ranks::Nine),
+            Card::new(Suits::Hearts, Ranks::Jack),
         ];
         assert_eq!(
             12,
@@ -413,11 +413,11 @@ mod tests {
     #[test]
     fn scorer_all_bad() {
         let hand = vec![
-            Card::new(Suits::Hearts, crate::cards::Ranks::Ace),
-            Card::new(Suits::Hearts, crate::cards::Ranks::Three),
-            Card::new(Suits::Spades, crate::cards::Ranks::Four),
-            Card::new(Suits::Spades, crate::cards::Ranks::Nine),
-            Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+            Card::new(Suits::Hearts, Ranks::Ace),
+            Card::new(Suits::Hearts, Ranks::Three),
+            Card::new(Suits::Spades, Ranks::Four),
+            Card::new(Suits::Spades, Ranks::Nine),
+            Card::new(Suits::Hearts, Ranks::Jack),
         ];
         assert_eq!(
             2,
@@ -431,11 +431,11 @@ mod tests {
     #[test]
     fn scorer_all_none() {
         let hand = vec![
-            Card::new(Suits::Hearts, crate::cards::Ranks::Three),
-            Card::new(Suits::Hearts, crate::cards::Ranks::Eight),
-            Card::new(Suits::Spades, crate::cards::Ranks::Nine),
-            Card::new(Suits::Spades, crate::cards::Ranks::Queen),
-            Card::new(Suits::Hearts, crate::cards::Ranks::Jack),
+            Card::new(Suits::Hearts, Ranks::Three),
+            Card::new(Suits::Hearts, Ranks::Eight),
+            Card::new(Suits::Spades, Ranks::Nine),
+            Card::new(Suits::Spades, Ranks::Queen),
+            Card::new(Suits::Hearts, Ranks::Jack),
         ];
         assert_eq!(
             0,
