@@ -1,5 +1,5 @@
-use self::Ranks::*;
-use self::Suits::*;
+use self::Ranks::{Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King};
+use self::Suits::{Diamonds, Hearts, Clubs, Spades};
 use itertools::{Itertools, Position};
 use std::fmt::Display;
 use std::slice::Iter;
@@ -75,9 +75,7 @@ impl Ranks {
 
     pub fn to_cribbage_value(&self) -> usize {
         match self {
-            Jack => 10,
-            Queen => 10,
-            King => 10,
+            Jack | Queen | King => 10,
             _ => self.to_rank_value(),
         }
     }
@@ -137,8 +135,8 @@ impl Card {
     pub fn print_hand(deck: &[Card]) {
         for (deck_position, card) in deck.iter().with_position() {
             match deck_position {
-                Position::Last => print!("{}", card),
-                _ => print!("{}, ", card),
+                Position::Last => print!("{card}"),
+                _ => print!("{card}, "),
             }
         }
         println!();

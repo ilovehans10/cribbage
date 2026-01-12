@@ -113,6 +113,12 @@ impl Scorer {
     /// constitutive cards it will return their score. If there are multiple runs that use the same
     /// cards it will find the longest run and make sure the run is multiplied by the number of
     /// times it is able to be made with repeated cards.
+    ///
+    /// # Panics
+    ///
+    /// Will panic if passed a hand with more than three pairs which isn't possible in a 5 card
+    /// hand.
+    ///
     /// ```
     /// use cribbage::scoring::Scorer;
     /// use cribbage::cards::Card;
@@ -152,7 +158,7 @@ impl Scorer {
                         1 => consecutive_count += 1,
                         _ => {
                             if position == Position::Middle {
-                                consecutive_count -= 1
+                                consecutive_count -= 1;
                             }
                         }
                     }
