@@ -206,7 +206,7 @@ mod tests {
                 Card::new(Suits::Hearts, Ranks::Five),
                 Card::new(Suits::Hearts, Ranks::Ten),
             ])
-        )
+        );
     }
 
     #[test]
@@ -217,7 +217,7 @@ mod tests {
                 Card::new(Suits::Hearts, Ranks::Four),
                 Card::new(Suits::Hearts, Ranks::Jack),
             ])
-        )
+        );
     }
 
     #[test]
@@ -229,7 +229,7 @@ mod tests {
                 Card::new(Suits::Spades, Ranks::Five),
                 Card::new(Suits::Hearts, Ranks::Ten),
             ])
-        )
+        );
     }
 
     #[test]
@@ -242,7 +242,7 @@ mod tests {
                 Card::new(Suits::Spades, Ranks::Ten),
                 Card::new(Suits::Clubs, Ranks::Ten),
             ])
-        )
+        );
     }
 
     #[test]
@@ -253,7 +253,7 @@ mod tests {
                 Card::new(Suits::Hearts, Ranks::Five),
                 Card::new(Suits::Spades, Ranks::Five),
             ])
-        )
+        );
     }
 
     #[test]
@@ -264,7 +264,7 @@ mod tests {
                 Card::new(Suits::Hearts, Ranks::Jack),
                 Card::new(Suits::Spades, Ranks::King),
             ])
-        )
+        );
     }
 
     #[test]
@@ -277,7 +277,7 @@ mod tests {
                 Card::new(Suits::Hearts, Ranks::Four),
                 Card::new(Suits::Spades, Ranks::Four),
             ])
-        )
+        );
     }
 
     #[test]
@@ -289,7 +289,7 @@ mod tests {
                 Card::new(Suits::Spades, Ranks::Five),
                 Card::new(Suits::Clubs, Ranks::Five),
             ])
-        )
+        );
     }
 
     #[test]
@@ -303,7 +303,7 @@ mod tests {
                 Card::new(Suits::Hearts, Ranks::Four),
                 Card::new(Suits::Spades, Ranks::Four),
             ])
-        )
+        );
     }
 
     #[test]
@@ -315,7 +315,7 @@ mod tests {
                 Card::new(Suits::Hearts, Ranks::Four),
                 Card::new(Suits::Hearts, Ranks::Five),
             ])
-        )
+        );
     }
 
     #[test]
@@ -327,7 +327,7 @@ mod tests {
                 Card::new(Suits::Spades, Ranks::Three),
                 Card::new(Suits::Hearts, Ranks::Four),
             ])
-        )
+        );
     }
 
     #[test]
@@ -340,7 +340,7 @@ mod tests {
                 Card::new(Suits::Hearts, Ranks::Four),
                 Card::new(Suits::Hearts, Ranks::Five),
             ])
-        )
+        );
     }
 
     #[test]
@@ -354,7 +354,7 @@ mod tests {
                 Card::new(Suits::Spades, Ranks::Nine),
                 Card::new(Suits::Hearts, Ranks::Ten),
             ])
-        )
+        );
     }
 
     #[test]
@@ -368,7 +368,7 @@ mod tests {
                 Card::new(Suits::Clubs, Ranks::Nine),
                 Card::new(Suits::Hearts, Ranks::Ten),
             ])
-        )
+        );
     }
 
     #[test]
@@ -382,7 +382,7 @@ mod tests {
                 Card::new(Suits::Hearts, Ranks::Five),
                 Card::new(Suits::Hearts, Ranks::Five),
             ])
-        )
+        );
     }
 
     #[test]
@@ -395,7 +395,7 @@ mod tests {
                 Card::new(Suits::Hearts, Ranks::Five),
                 Card::new(Suits::Hearts, Ranks::Six),
             ])
-        )
+        );
     }
 
     #[test]
